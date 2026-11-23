@@ -1,0 +1,394 @@
+/* ==========================================================================
+   Estilos de Pastelería Mishky (Fiel a la captura de pantalla)
+   ========================================================================== */
+
+:root {
+  --color-marron-oscuro: #5c3d2e;
+  --color-marron-texto: #3b2314;
+  --color-crema-fondo: #faf5ef;
+  --color-blanco: #ffffff;
+  --color-borde-pill: #8c6a58;
+  --color-favorito: #d99b43;
+  --color-agotado: #a82333;
+  --fuente-serif: Georgia, 'Times New Roman', serif;
+  --fuente-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Variables semánticas (las que cambian entre tema claro y oscuro) */
+  --color-superficie: #ffffff;
+  --color-sobre-acento: #ffffff;
+  --color-texto-secundario: #666666;
+  --color-estado: #776558;
+  --color-placeholder: #eeeeee;
+  --color-hover-pill: rgba(92, 61, 46, 0.08);
+  --color-cerrar-modal: rgba(255, 255, 255, 0.9);
+  --sombra-tarjeta-hover: rgba(92, 61, 46, 0.15);
+  --skeleton-1: #ede3da;
+  --skeleton-2: #dfd2c6;
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   TEMA OSCURO
+   Se activa con <html data-tema="oscuro"> (lo pone el script del <head>)
+   ========================================================================== */
+:root[data-tema="oscuro"] {
+  --color-crema-fondo: #1c1411;
+  --color-marron-texto: #f3e6da;
+  --color-marron-oscuro: #d9a679;   /* acento: pills activas, botones */
+  --color-borde-pill: #9c7b68;
+
+  --color-superficie: #2a201b;
+  --color-sobre-acento: #2a1a10;
+  --color-texto-secundario: #b8a699;
+  --color-estado: #a8978a;
+  --color-placeholder: #3a2e28;
+  --color-hover-pill: rgba(217, 166, 121, 0.14);
+  --color-cerrar-modal: rgba(42, 32, 27, 0.9);
+  --sombra-tarjeta-hover: rgba(0, 0, 0, 0.5);
+  --skeleton-1: #2a201b;
+  --skeleton-2: #3a2e28;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente-sans);
+  background-color: var(--color-crema-fondo);
+  color: var(--color-marron-texto);
+  line-height: 1.5;
+}
+
+/* --- Banner Superior (Hero) --- */
+.hero-banner {
+  width: 100%;
+  height: 320px;
+  background: url('../img/banner.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+}
+
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(30, 15, 10, 0.75) 0%, rgba(30, 15, 10, 0.25) 60%, rgba(0,0,0,0) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: var(--color-blanco);
+  max-width: 550px;
+}
+
+.hero-sub {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #e6c594;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-family: var(--fuente-serif);
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* --- Layout Principal --- */
+.contenedor-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.titulo-catalogo {
+  text-align: center;
+  font-family: var(--fuente-serif);
+  font-size: 2.2rem;
+  color: var(--color-marron-texto);
+  margin-bottom: 25px;
+}
+
+/* --- Botones de Categorías Pill-Shape --- */
+nav#filtros-categorias {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+nav#filtros-categorias button {
+  padding: 10px 22px;
+  border: 1.5px solid var(--color-borde-pill);
+  background: transparent;
+  color: var(--color-marron-texto);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.25s ease;
+}
+
+nav#filtros-categorias button:hover {
+  background: var(--color-hover-pill);
+}
+
+nav#filtros-categorias button[aria-pressed="true"] {
+  background: var(--color-marron-oscuro);
+  color: var(--color-sobre-acento);
+  border-color: var(--color-marron-oscuro);
+}
+
+/* --- Barra de Herramientas --- */
+.barra-herramientas {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.barra-herramientas input[type="search"],
+.barra-herramientas select {
+  padding: 8px 14px;
+  border: 1.5px solid var(--color-borde-pill);
+  border-radius: 20px;
+  outline: none;
+  background: var(--color-superficie);
+  font-size: 0.9rem;
+  color: var(--color-marron-texto);
+}
+
+.opcion-stock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-marron-texto);
+  cursor: pointer;
+}
+
+.opcion-stock input[type="checkbox"] {
+  accent-color: var(--color-marron-oscuro);
+}
+
+/* --- Estado --- */
+#estado {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-estado);
+  margin-bottom: 30px;
+}
+
+#btn-reintentar {
+  margin-left: 10px;
+  padding: 4px 12px;
+  background-color: var(--color-marron-oscuro);
+  color: var(--color-sobre-acento);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* --- Grilla de Tarjetas --- */
+#grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.tarjeta-producto {
+  background: var(--color-superficie);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.tarjeta-producto:hover,
+.tarjeta-producto:focus {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px var(--sombra-tarjeta-hover);
+}
+
+.tarjeta-producto .contenedor-img {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: var(--color-placeholder);
+}
+
+.tarjeta-producto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.tarjeta-producto img.foto-cargada {
+  opacity: 1;
+}
+
+/* Badges sobre la imagen (Favorito / Agotado) */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-blanco);
+  z-index: 2;
+}
+
+.badge-favorito {
+  background-color: var(--color-favorito);
+}
+
+.badge-agotado {
+  background-color: var(--color-agotado);
+}
+
+.tarjeta-info {
+  padding: 16px;
+}
+
+.tarjeta-info h3 {
+  font-family: var(--fuente-serif);
+  font-size: 1.2rem;
+  color: var(--color-marron-texto);
+  margin-bottom: 6px;
+}
+
+.tarjeta-info p {
+  font-size: 0.9rem;
+  color: var(--color-texto-secundario);
+}
+
+/* --- Skeleton Loading --- */
+.skeleton-card {
+  background: linear-gradient(90deg, var(--skeleton-1) 25%, var(--skeleton-2) 50%, var(--skeleton-1) 75%);
+  background-size: 200% 100%;
+  border-radius: 16px;
+  height: 320px;
+  animation: pulso 1.5s infinite ease-in-out;
+}
+
+@keyframes pulso {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --- Modal Nativo <dialog> --- */
+dialog {
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  background: var(--color-superficie);
+  color: var(--color-marron-texto);
+}
+
+dialog::backdrop {
+  background: rgba(30, 15, 10, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.modal-contenido {
+  padding: 25px;
+  position: relative;
+}
+
+.modal-contenido img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.modal-contenido h2 {
+  font-family: var(--fuente-serif);
+  color: var(--color-marron-texto);
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#btn-cerrar-modal {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  border: none;
+  background: var(--color-cerrar-modal);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--color-marron-texto);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#btn-cerrar-modal:hover {
+  background: var(--color-marron-oscuro);
+  color: var(--color-sobre-acento);
+}
+
+/* --- Botón de cambio de tema --- */
+#btn-tema {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-borde-pill);
+  background: var(--color-superficie);
+  color: var(--color-marron-texto);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+#btn-tema:hover {
+  transform: scale(1.1);
+}
+
+#btn-tema:focus-visible {
+  outline: 3px solid var(--color-favorito);
+  outline-offset: 2px;
+}
+
+/* Transición suave al cambiar de tema */
+body,
+.tarjeta-producto,
+dialog {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

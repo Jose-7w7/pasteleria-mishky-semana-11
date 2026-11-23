@@ -1,0 +1,475 @@
+/* ==========================================================================
+   Estilos de Pastelería Mishky (Fiel a la captura de pantalla)
+   ========================================================================== */
+
+:root {
+  --color-marron-oscuro: #5c3d2e;
+  --color-marron-texto: #3b2314;
+  --color-crema-fondo: #faf5ef;
+  --color-blanco: #ffffff;
+  --color-borde-pill: #8c6a58;
+  --color-favorito: #d99b43;
+  --color-agotado: #a82333;
+  --fuente-serif: Georgia, 'Times New Roman', serif;
+  --fuente-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente-sans);
+  background-color: var(--color-crema-fondo);
+  color: var(--color-marron-texto);
+  line-height: 1.5;
+}
+
+/* --- Banner Superior (Hero) --- */
+.hero-banner {
+  width: 100%;
+  height: 320px;
+  background: url('../img/banner.jpg') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+}
+
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(30, 15, 10, 0.75) 0%, rgba(30, 15, 10, 0.25) 60%, rgba(0,0,0,0) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: var(--color-blanco);
+  max-width: 550px;
+}
+
+.hero-sub {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #e6c594;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-family: var(--fuente-serif);
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* --- Layout Principal --- */
+.contenedor-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.titulo-catalogo {
+  text-align: center;
+  font-family: var(--fuente-serif);
+  font-size: 2.2rem;
+  color: var(--color-marron-texto);
+  margin-bottom: 25px;
+}
+
+/* --- Botones de Categorías Pill-Shape --- */
+nav#filtros-categorias {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+nav#filtros-categorias button {
+  padding: 10px 22px;
+  border: 1.5px solid var(--color-borde-pill);
+  background: transparent;
+  color: var(--color-marron-texto);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.25s ease;
+}
+
+nav#filtros-categorias button:hover {
+  background: rgba(92, 61, 46, 0.08);
+}
+
+nav#filtros-categorias button[aria-pressed="true"] {
+  background: var(--color-marron-oscuro);
+  color: var(--color-blanco);
+  border-color: var(--color-marron-oscuro);
+}
+
+/* --- Barra de Herramientas --- */
+.barra-herramientas {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.barra-herramientas input[type="search"],
+.barra-herramientas select {
+  padding: 8px 14px;
+  border: 1.5px solid var(--color-borde-pill);
+  border-radius: 20px;
+  outline: none;
+  background: #fff;
+  font-size: 0.9rem;
+  color: var(--color-marron-texto);
+}
+
+.opcion-stock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-marron-texto);
+  cursor: pointer;
+}
+
+.opcion-stock input[type="checkbox"] {
+  accent-color: var(--color-marron-oscuro);
+}
+
+/* --- Estado --- */
+#estado {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #776558;
+  margin-bottom: 30px;
+}
+
+#btn-reintentar {
+  margin-left: 10px;
+  padding: 4px 12px;
+  background-color: var(--color-marron-oscuro);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* --- Grilla de Tarjetas --- */
+#grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.tarjeta-producto {
+  background: var(--color-blanco);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.tarjeta-producto:hover,
+.tarjeta-producto:focus {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(92, 61, 46, 0.15);
+}
+
+.tarjeta-producto .contenedor-img {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: #eee;
+}
+
+.tarjeta-producto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.tarjeta-producto img.foto-cargada {
+  opacity: 1;
+}
+
+/* Badges sobre la imagen (Favorito / Agotado) */
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-blanco);
+  z-index: 2;
+}
+
+.badge-favorito {
+  background-color: var(--color-favorito);
+}
+
+.badge-agotado {
+  background-color: var(--color-agotado);
+}
+
+.tarjeta-info {
+  padding: 16px;
+}
+
+.tarjeta-info h3 {
+  font-family: var(--fuente-serif);
+  font-size: 1.2rem;
+  color: var(--color-marron-texto);
+  margin-bottom: 6px;
+}
+
+.tarjeta-info p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* --- Skeleton Loading --- */
+.skeleton-card {
+  background: linear-gradient(90deg, #ede3da 25%, #dfd2c6 50%, #ede3da 75%);
+  background-size: 200% 100%;
+  border-radius: 16px;
+  height: 320px;
+  animation: pulso 1.5s infinite ease-in-out;
+}
+
+@keyframes pulso {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --- Modal Nativo <dialog> --- */
+dialog {
+  margin: auto; /* el reset global (* {margin:0}) lo dejaba pegado a la esquina */
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  background: var(--color-blanco);
+}
+
+dialog::backdrop {
+  background: rgba(30, 15, 10, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.modal-contenido {
+  padding: 25px;
+  position: relative;
+}
+
+.modal-contenido img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.modal-contenido h2 {
+  font-family: var(--fuente-serif);
+  color: var(--color-marron-texto);
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+#btn-cerrar-modal {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--color-marron-texto);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#btn-cerrar-modal:hover {
+  background: var(--color-marron-oscuro);
+  color: white;
+}
+
+/* ==========================================================================
+   Retos: Favoritos y Mi pedido
+   ========================================================================== */
+
+/* --- Botón corazón en la tarjeta --- */
+.btn-favorito {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-marron-oscuro);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-favorito:hover {
+  transform: scale(1.12);
+}
+
+.btn-favorito[aria-pressed="true"] {
+  color: var(--color-agotado);
+}
+
+.btn-favorito:focus-visible,
+#btn-pedido:focus-visible,
+.btn-principal:focus-visible {
+  outline: 3px solid var(--color-favorito);
+  outline-offset: 2px;
+}
+
+/* --- Botones del modal --- */
+.btn-principal,
+.btn-secundario {
+  margin-top: 16px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-principal {
+  width: 100%;
+  border: none;
+  background: var(--color-marron-oscuro);
+  color: var(--color-blanco);
+}
+
+.btn-principal:disabled {
+  background: #b9a89c;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  border: 1.5px solid var(--color-borde-pill);
+  background: transparent;
+  color: var(--color-marron-texto);
+}
+
+/* --- Botón flotante del pedido --- */
+#btn-pedido {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 30px;
+  background: var(--color-marron-oscuro);
+  color: var(--color-blanco);
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+/* --- Lista del pedido --- */
+#lista-pedido {
+  list-style: none;
+  margin: 10px 0;
+}
+
+.fila-pedido {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eadfd5;
+}
+
+.fila-nombre {
+  font-family: var(--fuente-serif);
+}
+
+.fila-controles {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fila-controles button {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--color-borde-pill);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-marron-texto);
+  cursor: pointer;
+}
+
+.fila-controles button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.fila-subtotal {
+  min-width: 80px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.pedido-vacio {
+  padding: 16px 0;
+  color: #776558;
+}
+
+#total-pedido {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+#btn-cerrar-pedido {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-marron-texto);
+  cursor: pointer;
+}

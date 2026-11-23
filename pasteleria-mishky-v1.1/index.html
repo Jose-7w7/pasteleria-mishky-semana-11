@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastelería Mishky - Catálogo</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <!-- Header Banner / Hero -->
+  <header class="hero-banner">
+    <div class="hero-content">
+      <p class="hero-sub">HECHO A MANO EN CUSCO DESDE 2012</p>
+      <h1 class="hero-title">Dulces que se recuerdan</h1>
+      <p class="hero-desc">Tortas, postres peruanos, panes y galletas horneados cada mañana.</p>
+    </div>
+  </header>
+
+  <main class="contenedor-principal">
+    <h2 class="titulo-catalogo">Nuestro catálogo</h2>
+
+    <!-- Filtros de Categorías -->
+    <nav id="filtros-categorias">
+      <button type="button" data-categoria="Todas" aria-pressed="true">Todas (0)</button>
+      <button type="button" data-categoria="Tortas" aria-pressed="false">Tortas (0)</button>
+      <button type="button" data-categoria="Postres peruanos" aria-pressed="false">Postres peruanos (0)</button>
+      <button type="button" data-categoria="Panes y bollería" aria-pressed="false">Panes y bollería (0)</button>
+      <button type="button" data-categoria="Galletas y bocaditos" aria-pressed="false">Galletas y bocaditos (0)</button>
+    </nav>
+
+    <!-- Barra de herramientas con los retos añadidos -->
+    <section class="barra-herramientas">
+      <input type="search" id="buscador" placeholder="Buscar por nombre...">
+      
+      <label class="opcion-stock">
+        <input type="checkbox" id="chk-stock"> Ocultar sin stock
+      </label>
+
+      <label class="opcion-stock">
+        <input type="checkbox" id="chk-favoritos"> Solo favoritos
+      </label>
+
+      <select id="orden">
+        <option value="defecto">Orden por defecto</option>
+        <option value="precio-asc">Menor precio</option>
+        <option value="precio-desc">Mayor precio</option>
+        <option value="nombre-asc">Nombre A–Z</option>
+      </select>
+    </section>
+
+    <!-- Estado y contador -->
+    <div id="estado" aria-live="polite">Cargando productos...</div>
+
+    <!-- Grilla de productos -->
+    <section id="grilla" aria-busy="true"></section>
+  </main>
+
+  <!-- Modal nativo <dialog> -->
+  <dialog id="modal-detalle">
+    <div class="modal-contenido">
+      <button id="btn-cerrar-modal" type="button" aria-label="Cerrar modal">&times;</button>
+      <img id="modal-img" src="" alt="">
+      <h2 id="modal-nombre"></h2>
+      <p id="modal-descripcion"></p>
+      <p id="modal-precio"></p>
+      <p id="modal-stock"></p>
+      <button id="btn-agregar" class="btn-principal" type="button">Agregar al pedido</button>
+    </div>
+  </dialog>
+
+  <!-- Botón flotante del pedido -->
+  <button id="btn-pedido" type="button" aria-haspopup="dialog">Mi pedido (0)</button>
+
+  <!-- Modal del pedido -->
+  <dialog id="modal-pedido" aria-labelledby="titulo-pedido">
+    <div class="modal-contenido">
+      <button id="btn-cerrar-pedido" type="button" aria-label="Cerrar pedido">&times;</button>
+      <h2 id="titulo-pedido">Mi pedido</h2>
+      <ul id="lista-pedido"></ul>
+      <p id="total-pedido"></p>
+      <button id="btn-vaciar" class="btn-secundario" type="button">Vaciar pedido</button>
+    </div>
+  </dialog>
+
+  <script src="js/catalogo.js"></script>
+</body>
+</html>
